@@ -6,10 +6,9 @@ rm initrd.gz
 wget http://opensource.xtdv.net/ubuntu/dists/wily/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64/initrd.gz
 mkdir irmod
 cd irmod
-gzip -d < ../initrd.gz | \
-        cpio --extract --verbose --make-directories --no-absolute-filenames
+gzip -d < ../initrd.gz | cpio --extract --verbose --make-directories --no-absolute-filenames
 cp ../preseed.cfg preseed.cfg
-find . | cpio -H newc --create --verbose | \
-        gzip -9 > ../initrd.gz
+find . | cpio -H newc --create --verbose | gzip -9 > ../initrd.gz
 cd ../
-rm -rf irmod/
+rm -rf irmod
+echo "Your preseed.cfg has been added to the initrd.gz and you may now type ./ubuntu.sh in order to pxe boot ubuntu with your custom preseed file "
